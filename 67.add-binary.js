@@ -4,6 +4,8 @@
  * [67] Add Binary
  */
 
+// 本题思路 先补齐位数 然后根据 进位机制来判断
+
 // @lc code=start
 /**
  * @param {string} a
