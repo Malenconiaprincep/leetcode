@@ -10,29 +10,43 @@
  * @param {string} b
  * @return {string}
  */
-var addBinary = function(a, b) {
-    const sum = parseInt(a) + parseInt(b)
-    let str = ''
-    let carry = 0
-
-    for(let i=0; i < sum.toString().split('').reverse() ; i++) {
-      if (sum[i] === '2') {
-        carry += 1
-        str += '0'
+var addBinary = function (a, b) {
+  const length = Math.max(a.length, b.length)
+  let str1 = Array(length - a.length).fill(0).join('') + a
+  let str2 = Array(length - b.length).fill(0).join('') + b
+  let str = ''
+  let carry = 0
+  var i = length - 1
+  while (i >= 0) {
+    var sum = Number(str1[i]) + Number(str2[i])
+    if (sum === 2) {
+      if (carry === 1) {
+        str += '1'
       } else {
-        if (sum[i] === '1' && carry === 1) {
-          str += '0'
-          carry = 0
-        } else if(carry === 1) {
-          str += '1'
-          carry = 0
-        } else {
-          str += sum[i]
-        }
+        str += '0'
+      }
+      carry = 1
+    } else {
+      if (sum === 1 && carry === 1) {
+        str += '0'
+        carry = 1
+      } else if (carry === 1) {
+        str += '1'
+        carry = 0
+      } else {
+        str += sum.toString()
+        carry = 0
       }
     }
+    i--
+  }
 
-    return str.split('').reverse().join('')
+
+  if (carry === 1) {
+    str += '1'
+  }
+  console.log(str)
+  return str.split('').reverse().join('')
 };
 // @lc code=end
 
